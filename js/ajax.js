@@ -15,7 +15,6 @@ function ajaxRequest(method, url, callback) {
         if (request.readyState == 4) {
             if (request.status == 200) {
                 callback(request.responseText);
-                return;
             }
             else callback("")
         } else callback("")
