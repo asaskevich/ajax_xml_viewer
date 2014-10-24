@@ -1,0 +1,31 @@
+.tooltip {
+    position: absolute;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 5px 0px #efdfcf;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+
+input {
+    margin-bottom: 8px;
+    max-width: 100%;
+}
+
+button {
+    float: right;
+}
+
+.panel {
+    width: 100%;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    font-family: monospace;
+    background: #f9f6ff;
+    padding: 2px;
+}
