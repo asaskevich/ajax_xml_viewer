@@ -49,7 +49,7 @@ function initDragListener(elementId) {
     var offset = {x: 0, y: 0};
 
     function addListeners() {
-        document.getElementById(elementId).addEventListener('mousedown', mouseDown, false);
+        element.addEventListener('mousedown', mouseDown, false);
         window.addEventListener('mouseup', mouseUp, false);
     }
 
@@ -67,10 +67,9 @@ function initDragListener(elementId) {
         // Do not drag when current active element is input or button
         if ((document.activeElement !== document.getElementById("path")) &&
             (document.activeElement !== document.getElementById("button_get"))) {
-            var div = document.getElementById('tooltip');
-            div.style.position = 'absolute';
-            div.style.top = event.clientY - offset.y + 'px';
-            div.style.left = event.clientX - offset.x + 'px';
+            element.style.position = 'absolute';
+            element.style.top = event.clientY - offset.y + 'px';
+            element.style.left = event.clientX - offset.x + 'px';
         }
     }
 

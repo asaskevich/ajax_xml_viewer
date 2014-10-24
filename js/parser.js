@@ -163,5 +163,8 @@ function parseXml(xmlString, status) {
         document.getElementById("errors_panel").style.display = "none";
         document.getElementById("warnings_panel").innerHTML = "";
         document.getElementById("warnings_panel").style.display = "none";
+        errorsTab.innerHTML = "Errors (0)";
+        warningTab.innerHTML = "Warnings (0)";
+        xmlTab.innerHTML = "XML (0 bytes)";
     }
 }
