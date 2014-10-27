@@ -1,6 +1,6 @@
 /**
  * onClick listener.
- * Makes request after clicking on button.
+ * Makes GET request after clicking on button.
  */
 function onGETButtonClick() {
     var url = document.getElementById("path").value;
@@ -8,48 +8,99 @@ function onGETButtonClick() {
 }
 
 /**
+ * onClick listener.
+ * Makes POST request after clicking on button.
+ */
+function onPOSTButtonClick() {
+    var url = document.getElementById("path").value;
+    ajaxRequest("POST", url, parseXml)
+}
+
+/**
+ * Hide all panels, but leaves panel leavePanel opened/hidden
+ * @param leavePanel
+ */
+function hideAllPanels(leavePanel) {
+    if (leavePanel !== "xml") {
+        document.getElementById("xml_panel").style.display = "none";
+        document.getElementById("xml_tab").className = "";
+    }
+    if (leavePanel !== "errors") {
+        document.getElementById("errors_panel").style.display = "none";
+        document.getElementById("errors_tab").className = "";
+    }
+    if (leavePanel !== "warnings") {
+        document.getElementById("warnings_panel").style.display = "none";
+        document.getElementById("warnings_tab").className = "";
+    }
+}
+
+/**
  * Toggles informational panel
  */
 function toggleXMLPanel() {
+    hideAllPanels("xml");
     var panel = document.getElementById("xml_panel");
+    var tab = document.getElementById("xml_tab");
     // Don't open empty panels
     if (panel.innerHTML.length <= 0) return;
-    if (panel.style.display === "none") panel.style.display = "";
-    else panel.style.display = "none";
+    if (panel.style.display === "none") {
+        panel.style.display = "";
+        tab.className = "active_tab";
+    } else {
+        panel.style.display = "none";
+        tab.className = "";
+    }
 }
 
 /**
  * Toggles errors panel
  */
 function toggleErrorsPanel() {
+    hideAllPanels("errors");
     var panel = document.getElementById("errors_panel");
+    var tab = document.getElementById("errors_tab");
     // Don't open empty panels
     if (panel.innerHTML.length <= 0) return;
-    if (panel.style.display === "none") panel.style.display = "";
-    else panel.style.display = "none";
+    if (panel.style.display === "none") {
+        panel.style.display = "";
+        tab.className = "active_tab";
+    } else {
+        panel.style.display = "none";
+        tab.className = "";
+    }
 }
 
 /**
  * Toggles warnings panel
  */
 function toggleWarningsPanel() {
+    hideAllPanels("warnings");
     var panel = document.getElementById("warnings_panel");
+    var tab = document.getElementById("warnings_tab");
     // Don't open empty panels
     if (panel.innerHTML.length <= 0) return;
-    if (panel.style.display === "none") panel.style.display = "";
-    else panel.style.display = "none";
+    if (panel.style.display === "none") {
+        panel.style.display = "";
+        tab.className = "active_tab";
+    } else {
+        panel.style.display = "none";
+        tab.className = "";
+    }
 }
 
 /**
- * Applies drag listener to elementId
+ * Applies drag listener to elementId's titleId
  * @param elementId
+ * @param titleId
  */
-function initDragListener(elementId) {
+function initDragListener(elementId, titleId) {
     var element = document.getElementById(elementId);
+    var title = document.getElementById(titleId);
     var offset = {x: 0, y: 0};
 
     function addListeners() {
-        element.addEventListener('mousedown', mouseDown, false);
+        title.addEventListener('mousedown', mouseDown, false);
         window.addEventListener('mouseup', mouseUp, false);
     }
 

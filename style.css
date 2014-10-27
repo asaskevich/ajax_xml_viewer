@@ -12,6 +12,17 @@
     user-select: none;
 }
 
+#title {
+    border: 1px solid black;
+    margin: 2px;
+    padding: 3px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    text-align: center;
+    background: #fdfef8;
+    cursor: move;
+}
+
 input {
     margin-bottom: 8px;
     max-width: 100%;
@@ -19,13 +30,36 @@ input {
 
 button {
     float: right;
+    margin-left: 5px;
 }
 
 .panel {
     width: 100%;
     border: 1px solid black;
+    border-radius: 4px;
     margin-bottom: 10px;
     font-family: monospace;
     background: #f9f6ff;
     padding: 2px;
+}
+
+.active_tab {
+    font-weight: bold;
+    color: black;
+}
+
+span.tag_name {
+    color: red;
+}
+
+span.attr_name {
+    color: blue;
+}
+
+span.attr_value {
+    color: #ed03fe;
+}
+
+span.text_node {
+    color: rgba(27, 0, 54, 0.95);
 }

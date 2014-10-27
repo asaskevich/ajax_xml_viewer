@@ -155,16 +155,64 @@ function parseXml(xmlString, status) {
         removeTags(xml, "error");
         removeTags(xml, "warning");
         var panel = document.getElementById("xml_panel");
-        panel.innerHTML = escapeXML(getXMLAsString(xml));
+        panel.innerHTML = highlightXml(xml.childNodes, "");
     } else {
         document.getElementById("xml_panel").innerHTML = "";
-        document.getElementById("xml_panel").style.display = "none";
         document.getElementById("errors_panel").innerHTML = "";
-        document.getElementById("errors_panel").style.display = "none";
         document.getElementById("warnings_panel").innerHTML = "";
-        document.getElementById("warnings_panel").style.display = "none";
+        hideAllPanels();
         errorsTab.innerHTML = "Errors (0)";
         warningTab.innerHTML = "Warnings (0)";
         xmlTab.innerHTML = "XML (0 bytes)";
     }
+}
+
+/**
+ * Wraps element with span and returns string equivalent
+ * @param value
+ * @param span_class
+ * @returns {string}
+ */
+function wrap(value, span_class) {
+    return "<span class='" + span_class + "'>" + escapeXML(value) + "</span>";
+}
+
+/**
+ * Returns node as spanned string
+ * @param node
+ * @returns {string}
+ */
+function getNodeAsText(node) {
+    var result = wrap(node.nodeName, "tag_name") + (node.attributes.length > 0 ? " " : "");
+    var attrs = node.attributes;
+    for (var i = 0; i < attrs.length; i++) {
+        result += wrap(attrs[i].nodeName, "attr_name");
+        result += '=';
+        result += wrap('"' + node.getAttribute(attrs[i].nodeName) + '"', "attr_value");
+        if (i !== attrs.length - 1) result += " ";
+    }
+    return result;
+}
+
+/**
+ * Highlights nodes and returns string equivalent
+ * @param nodes
+ * @param offset
+ * @returns {string}
+ */
+function highlightXml(nodes, offset) {
+    offset = offset || "";
+    var result = "";
+    for (var i = 0; i < nodes.length; i++) {
+        if (nodes[i].hasChildNodes()) {
+            result += offset + "&lt;" + getNodeAsText(nodes[i]) + "&gt;\n";
+            result += highlightXml(nodes[i].childNodes, offset + "&nbsp;&nbsp;");
+            result += offset + "&lt;/" + wrap(nodes[i].nodeName, "tag_name") + "&gt;\n";
+        } else if (nodes[i].nodeName !== "#text") {
+            result += offset + "&lt;" + getNodeAsText(nodes[i]) + "/&gt;\n";
+        } else if (!(!nodes[i].nodeValue || /^\s*$/.test(nodes[i].nodeValue))) {
+            result += offset + wrap(nodes[i].nodeValue, "text_node") + "\n";
+        }
+    }
+    return result;
 }

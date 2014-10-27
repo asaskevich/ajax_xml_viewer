@@ -3,11 +3,24 @@
  * @param caption
  * @returns {HTMLElement} new button as DOM element
  */
-function getButton(caption) {
+function getGetButton(caption) {
     var button = document.createElement("button");
     button.innerHTML = caption;
     button.id = "button_get";
     button.setAttribute("onclick", "onGETButtonClick()");
+    return button;
+}
+
+/**
+ * Creates new button with onClick listener with specified caption
+ * @param caption
+ * @returns {HTMLElement} new button as DOM element
+ */
+function getPostButton(caption) {
+    var button = document.createElement("button");
+    button.innerHTML = caption;
+    button.id = "button_post";
+    button.setAttribute("onclick", "onPOSTButtonClick()");
     return button;
 }
 
@@ -58,6 +71,17 @@ function getStatusTab() {
 }
 
 /**
+ * Creates draggable title
+ * @returns {HTMLElement}
+ */
+function getTitle() {
+    var title = document.createElement("div");
+    title.id = "title";
+    title.innerHTML = "AJAX XML Viewer";
+    return title;
+}
+
+/**
  * Creates new panel
  * @param panelId - id of panel
  * @param tag - tag, used for creating tab. By default = div
@@ -70,6 +94,9 @@ function getPanel(panelId, tag) {
     panel.id = panelId;
     panel.className = "panel";
     panel.innerHTML = "";
+    panel.style.overflow = "auto";
+    panel.style.maxHeight = (window.innerHeight / 2) + "px";
+    panel.style.maxWidth = (window.innerWidth / 2) + "px";
     return panel;
 }
 
@@ -87,14 +114,16 @@ function initGUI() {
         var infoPanel = getPanel("xml_panel", "pre");
         var errorsPanel = getPanel("errors_panel");
         var warningsPanel = getPanel("warnings_panel");
+        tooltip.appendChild(getTitle());
         tooltip.appendChild(input);
-        tooltip.appendChild(getButton("GET"));
+        tooltip.appendChild(getGetButton("GET"));
+        tooltip.appendChild(getPostButton("POST"));
         tooltip.appendChild(getTabs());
         tooltip.appendChild(getStatusTab());
         tooltip.appendChild(infoPanel);
         tooltip.appendChild(errorsPanel);
         tooltip.appendChild(warningsPanel);
         document.body.appendChild(tooltip);
-        initDragListener("tooltip");
+        initDragListener("tooltip", "title");
     };
 }

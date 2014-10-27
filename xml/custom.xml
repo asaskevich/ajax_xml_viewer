@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <books>
-    <item>
+    <item id="book_id" lang="RU">
         <name>Awesome book</name>
         <author>John Carlong</author>
     </item>
     <error text="Can't receive item" code="10"/>
-    <shelf>
+    <shelf location="floor_10">
         <item>
-            <name>Histroy of PCs</name>
-            <author>Anonymous</author>
+            <name>History of PCs</name>
+            <author country="BY">Anonymous</author>
             <warning text="This shelf seems to be old."/>
         </item>
+        <element id="10" value="str" />
         <warning text="There are no more books here."/>
     </shelf>
 </books>
