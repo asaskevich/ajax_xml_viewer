@@ -174,6 +174,7 @@ function parseXml(xmlString, status) {
  * @returns {string}
  */
 function wrap(value, span_class) {
+    console.log(value)
     return "<span class='" + span_class + "'>" + escapeXML(value) + "</span>";
 }
 
@@ -208,8 +209,10 @@ function highlightXml(nodes, offset) {
             result += offset + "&lt;" + getNodeAsText(nodes[i]) + "&gt;\n";
             result += highlightXml(nodes[i].childNodes, offset + "&nbsp;&nbsp;");
             result += offset + "&lt;/" + wrap(nodes[i].nodeName, "tag_name") + "&gt;\n";
-        } else if (nodes[i].nodeName !== "#text") {
+        } else if (nodes[i].nodeName !== "#text" && nodes[i].nodeName !== "#comment" ) {
             result += offset + "&lt;" + getNodeAsText(nodes[i]) + "/&gt;\n";
+        } else if (nodes[i].nodeName === "#comment") {
+            result += offset + wrap("<!-- " + nodes[i].nodeValue + " -->", "comment") + "\n";
         } else if (!(!nodes[i].nodeValue || /^\s*$/.test(nodes[i].nodeValue))) {
             result += offset + wrap(nodes[i].nodeValue, "text_node") + "\n";
         }
