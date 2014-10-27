@@ -10,3 +10,5 @@ Example xml files:
 * `xml/plant_catalog.xml`
 * `xml/simple.xml`
 * `xml/custom.xml`
+* `xml/books.xml`
+* `xml/namespace.xml`
