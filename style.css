@@ -63,3 +63,7 @@ span.attr_value {
 span.text_node {
     color: rgba(27, 0, 54, 0.95);
 }
+
+span.comment {
+    color: rgba(32, 168, 66, 0.95);
+}
